@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sliceenglish
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: WHISPER_MODEL
+        value: base.en
+      - key: SLICEENGLISH_WORK_DIR
+        value: /tmp/sliceenglish-sessions

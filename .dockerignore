@@ -1,0 +1,6 @@
+.git/
+.sessions/
+__pycache__/
+tests/
+*.pyc
+.env

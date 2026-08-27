@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="把英语音频切成可逐句听写的练习。">
+  <title>SliceEnglish · 逐句听写</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header><a class="logo" href="/">slice<span>English</span></a><p>把每一句听清楚</p><span class="privacy">本次处理后自动清除</span></header>
+  <main>
+    <section id="upload-screen" class="screen hero-screen">
+      <p class="eyebrow">ENGLISH LISTENING PRACTICE</p>
+      <h1>把任何英文音频<br><em>切成一句一句练。</em></h1>
+      <p class="lead">支持最长 30 分钟的课堂录音、播客或新闻。自动断句后，由你快速确认。</p>
+      <label id="drop-zone" class="drop-zone" for="audio-file">
+        <input id="audio-file" type="file" accept="audio/mpeg,audio/wav,audio/x-m4a,.mp3,.wav,.m4a">
+        <span class="upload-icon">↑</span><strong>上传你的音频</strong><small>MP3、WAV、M4A · 最长 30 分钟 · 最大 500MB</small>
+      </label>
+      <p id="upload-message" class="message" role="status"></p>
+      <div class="promise"><span>01</span> 逐句听写 <span>02</span> 即时纠错 <span>03</span> 发现薄弱句</div>
+    </section>
+
+    <section id="processing-screen" class="screen hidden centered">
+      <div class="spinner"></div><p id="processing-message">正在准备音频…</p>
+      <div class="progress"><i id="processing-progress"></i></div>
+      <small>长音频会分块上传并处理，你可以留在此页面等待完成。</small>
+    </section>
+
+    <section id="review-screen" class="screen hidden">
+      <div class="section-head"><div><p class="eyebrow">STEP 1 · CHECK THE SLICES</p><h2>先确认切片，再开始听写</h2><p>带有“建议检查”的句子可能有不清晰的停顿或转写。你可以任意编辑。</p></div><button id="start-practice" class="primary">开始听写 →</button></div>
+      <div class="review-layout">
+        <aside><div class="audio-card"><audio id="review-audio" controls></audio><p id="audio-meta"></p></div><button id="save-slices" class="secondary">保存切片修改</button></aside>
+        <div id="segment-editor" class="segment-editor"></div>
+      </div>
+    </section>
+
+    <section id="practice-screen" class="screen hidden">
+      <div class="practice-top"><div><p class="eyebrow">STEP 2 · DICTATION</p><h2 id="practice-title">第 1 句</h2></div><button id="back-to-review" class="quiet">编辑切片</button></div>
+      <div class="practice-layout">
+        <aside><div id="sentence-nav" class="sentence-nav"></div></aside>
+        <article class="player-card"><audio id="practice-audio" controls></audio><div class="player-actions"><button id="previous-sentence">← 上一句</button><button id="repeat-sentence" class="repeat">↻ 重听本句</button><button id="next-sentence">下一句 →</button></div><div class="speed"><span>速度</span><button data-speed="0.75">0.75×</button><button data-speed="1" class="selected">1×</button><button data-speed="1.25">1.25×</button></div></article>
+        <article class="dictation-card"><span id="review-flag" class="flag hidden">建议检查</span><p class="instruction">听完后，输入你听到的英文。</p><textarea id="dictation-input" placeholder="Type what you hear…" spellcheck="false"></textarea><div class="dictation-actions"><button id="show-answer" class="quiet">显示答案</button><button id="check-answer" class="primary">检查答案</button></div><div id="comparison" class="comparison hidden"></div></article>
+      </div>
+    </section>
+  </main>
+  <template id="segment-template"><article class="segment"><button class="listen" title="试听本句">▶</button><div class="segment-main"><div class="segment-meta"></div><textarea class="segment-text" spellcheck="false"></textarea><div class="boundary-controls"><label>开始 <input class="start-range" type="range" min="0"></label><label>结束 <input class="end-range" type="range" min="0"></label><span class="range-value"></span></div></div><div class="segment-tools"><button class="split">拆分</button><button class="merge">合并上一句</button></div></article></template>
+  <script src="/static/app.js"></script>
+</body>
+</html>
